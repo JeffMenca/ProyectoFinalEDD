@@ -6,18 +6,19 @@
 package GUI;
 
 import Classes.claseMain;
+import Objects.Edificio;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Jeffrey
  */
-public class EliminarUsuario extends javax.swing.JFrame {
+public class CrearEdificio extends javax.swing.JFrame {
 
     /**
-     * Creates new form EliminarUsuario
+     * Creates new form CrearEdificio
      */
-    public EliminarUsuario() {
+    public CrearEdificio() {
         initComponents();
         setVisible(true);
         pack();
@@ -36,7 +37,7 @@ public class EliminarUsuario extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        IDJTextField = new javax.swing.JTextField();
+        NombreJTextField1 = new javax.swing.JTextField();
         IngresarjButton = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
 
@@ -50,22 +51,22 @@ public class EliminarUsuario extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 143, 157));
-        jLabel1.setText("Eliminacion de usuario");
+        jLabel1.setText("Creacion de edificio");
 
-        IDJTextField.setBackground(new java.awt.Color(51, 51, 51));
-        IDJTextField.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        IDJTextField.setForeground(new java.awt.Color(255, 255, 255));
-        IDJTextField.setText("ID o carnet");
-        IDJTextField.addMouseListener(new java.awt.event.MouseAdapter() {
+        NombreJTextField1.setBackground(new java.awt.Color(51, 51, 51));
+        NombreJTextField1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        NombreJTextField1.setForeground(new java.awt.Color(255, 255, 255));
+        NombreJTextField1.setText("Nombre");
+        NombreJTextField1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                IDJTextFieldMouseClicked(evt);
+                NombreJTextField1MouseClicked(evt);
             }
         });
 
-        IngresarjButton.setBackground(new java.awt.Color(255, 51, 51));
+        IngresarjButton.setBackground(new java.awt.Color(0, 143, 157));
         IngresarjButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         IngresarjButton.setForeground(new java.awt.Color(255, 255, 255));
-        IngresarjButton.setText("Eliminar usuario");
+        IngresarjButton.setText("Crear edificio");
         IngresarjButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         IngresarjButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,25 +90,24 @@ public class EliminarUsuario extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(NombreJTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jButton8)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
-                                .addComponent(IDJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(174, 174, 174)
-                        .addComponent(IngresarjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(112, Short.MAX_VALUE))
+                                .addGap(69, 69, 69)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addComponent(jButton8)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(38, 38, 38)
+                                .addComponent(jLabel1))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(193, 193, 193)
+                                .addComponent(IngresarjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(163, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,15 +116,14 @@ public class EliminarUsuario extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton8)
                     .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(107, 107, 107)
-                        .addComponent(IDJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(IngresarjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(9, 9, 9)
+                        .addComponent(NombreJTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(IngresarjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(125, 125, 125))
         );
 
@@ -132,9 +131,7 @@ public class EliminarUsuario extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,22 +156,30 @@ public class EliminarUsuario extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void IDJTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IDJTextFieldMouseClicked
-        IDJTextField.setText("");
-    }//GEN-LAST:event_IDJTextFieldMouseClicked
+    private void NombreJTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NombreJTextField1MouseClicked
+        NombreJTextField1.setText("");
+    }//GEN-LAST:event_NombreJTextField1MouseClicked
 
     private void IngresarjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IngresarjButtonActionPerformed
-        if ((IDJTextField.getText()!=null) && (!"".equals(IDJTextField.getText()))) {
-            if(claseMain.listaUsuarios.delete(IDJTextField.getText())){
-                JOptionPane.showMessageDialog(null, "Se elimino el usuario");
+
+        //Estudiante
+        if (NombreJTextField1.getText() != null && !"".equals(NombreJTextField1.getText())) {
+            try {
+                if (claseMain.listaEdificios.buscarDato(NombreJTextField1.getText()) != null) {
+                    JOptionPane.showMessageDialog(null, "El edificio ya existe");
+                } else {
+                    Edificio nuevoEdificio = new Edificio(NombreJTextField1.getText());
+                    claseMain.listaEdificios.add(nuevoEdificio);
+                    JOptionPane.showMessageDialog(null, "Se creo el edificio correctamente");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Ocurrio un error");
             }
-            else{
-                JOptionPane.showMessageDialog(null, "No se encontro el user");
-            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No ingreso el nombre");
         }
-        else{
-            JOptionPane.showMessageDialog(null, "No ingreso su el id o carnet");
-        }
+
+
     }//GEN-LAST:event_IngresarjButtonActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -200,27 +205,27 @@ public class EliminarUsuario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EliminarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CrearEdificio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EliminarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CrearEdificio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EliminarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CrearEdificio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EliminarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CrearEdificio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EliminarUsuario().setVisible(true);
+                new CrearEdificio().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField IDJTextField;
     private javax.swing.JButton IngresarjButton;
+    private javax.swing.JTextField NombreJTextField1;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;

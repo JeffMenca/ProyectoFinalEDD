@@ -12,12 +12,12 @@ import javax.swing.JOptionPane;
  *
  * @author Jeffrey
  */
-public class EliminarUsuario extends javax.swing.JFrame {
+public class EliminarEdificio extends javax.swing.JFrame {
 
     /**
-     * Creates new form EliminarUsuario
+     * Creates new form EliminarEdificio
      */
-    public EliminarUsuario() {
+    public EliminarEdificio() {
         initComponents();
         setVisible(true);
         pack();
@@ -50,12 +50,12 @@ public class EliminarUsuario extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 143, 157));
-        jLabel1.setText("Eliminacion de usuario");
+        jLabel1.setText("Eliminacion de edificio");
 
         IDJTextField.setBackground(new java.awt.Color(51, 51, 51));
         IDJTextField.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         IDJTextField.setForeground(new java.awt.Color(255, 255, 255));
-        IDJTextField.setText("ID o carnet");
+        IDJTextField.setText("Nombre del edificio");
         IDJTextField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 IDJTextFieldMouseClicked(evt);
@@ -65,7 +65,7 @@ public class EliminarUsuario extends javax.swing.JFrame {
         IngresarjButton.setBackground(new java.awt.Color(255, 51, 51));
         IngresarjButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         IngresarjButton.setForeground(new java.awt.Color(255, 255, 255));
-        IngresarjButton.setText("Eliminar usuario");
+        IngresarjButton.setText("Eliminar edificio");
         IngresarjButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         IngresarjButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,16 +164,14 @@ public class EliminarUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_IDJTextFieldMouseClicked
 
     private void IngresarjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IngresarjButtonActionPerformed
-        if ((IDJTextField.getText()!=null) && (!"".equals(IDJTextField.getText()))) {
-            if(claseMain.listaUsuarios.delete(IDJTextField.getText())){
-                JOptionPane.showMessageDialog(null, "Se elimino el usuario");
+        if ((IDJTextField.getText() != null) && (!"".equals(IDJTextField.getText()))) {
+            if (claseMain.listaEdificios.delete(IDJTextField.getText())) {
+                JOptionPane.showMessageDialog(null, "Se elimino el edificio");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontro el edificio");
             }
-            else{
-                JOptionPane.showMessageDialog(null, "No se encontro el user");
-            }
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "No ingreso su el id o carnet");
+        } else {
+            JOptionPane.showMessageDialog(null, "No ingreso el nombre del edificio");
         }
     }//GEN-LAST:event_IngresarjButtonActionPerformed
 
@@ -200,20 +198,20 @@ public class EliminarUsuario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EliminarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminarEdificio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EliminarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminarEdificio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EliminarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminarEdificio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EliminarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminarEdificio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EliminarUsuario().setVisible(true);
+                new EliminarEdificio().setVisible(true);
             }
         });
     }

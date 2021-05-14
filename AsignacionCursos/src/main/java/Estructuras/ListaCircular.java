@@ -1,10 +1,11 @@
-
 package Estructuras;
 
 /**
  *
  * @author Jeffrey
  */
+import Objects.Curso;
+import Objects.Edificio;
 import Objects.Usuario;
 import javax.swing.JOptionPane;
 
@@ -18,11 +19,45 @@ public class ListaCircular<T> {
     private Nodo<T> end;
     private int size;
 
-    
-
     public ListaCircular() {
         root = null;
         end = null;
+    }
+
+    public class Nodo<T> {
+
+        private T data;
+        private Nodo<T> next;
+        private Nodo<T> prev;
+
+        public Nodo(T data) {
+            this.data = data;
+        }
+
+        public T getData() {
+            return data;
+        }
+
+        public Nodo<T> getNext() {
+            return next;
+        }
+
+        public Nodo<T> getPrev() {
+            return prev;
+        }
+
+        public void setData(T data) {
+            this.data = data;
+        }
+
+        public void setNext(Nodo<T> next) {
+            this.next = next;
+        }
+
+        public void setPrev(Nodo<T> prev) {
+            this.prev = prev;
+        }
+
     }
 
     public void add(T data) {
@@ -41,7 +76,7 @@ public class ListaCircular<T> {
             root.setPrev(end);
         } else {
             String id = getId(data);
-            JOptionPane.showMessageDialog(null, "El dato: \"" + id + "\" ya existe.");
+            JOptionPane.showMessageDialog(null, "El id: \"" + id + "\" ya existe.");
         }
     }
 
@@ -67,6 +102,12 @@ public class ListaCircular<T> {
         if (data instanceof Usuario) {
             Usuario user = (Usuario) data;
             return String.valueOf(user.getId());
+        } else if (data instanceof Edificio) {
+            Edificio edificio = (Edificio) data;
+            return String.valueOf(edificio.getNombre());
+        } else if (data instanceof Curso) {
+            Curso curso = (Curso) data;
+            return String.valueOf(curso.getCodigo());
         }
         return null;
     }
@@ -113,7 +154,6 @@ public class ListaCircular<T> {
     public void mostrarDatos() {
         if (root != null) {
             Nodo<T> aux = root;
-            System.out.println("///////////////////////////////////////");
             do {
                 if (aux.getData() instanceof Usuario) {
                     Usuario user = (Usuario) aux.getData();
@@ -134,7 +174,7 @@ public class ListaCircular<T> {
             } while (aux != root);
         }
     }
-    
+
     public Nodo<T> buscarDato(String nombre) {
         if (root != null) {
             Nodo<T> aux = root;
@@ -144,20 +184,14 @@ public class ListaCircular<T> {
                     if (user.getNombre().equals(nombre)) {
                         return aux;
                     }
-                }
-                aux = aux.getNext();
-            } while (aux != root);
-        }
-        return null;
-    }
-    
-    public Nodo<T> buscarID(int id) {
-        if (root != null) {
-            Nodo<T> aux = root;
-            do {
-                if (aux.getData() instanceof Usuario) {
-                    Usuario user = (Usuario) aux.getData();
-                    if (user.getId()==id) {
+                } else if (aux.getData() instanceof Edificio) {
+                    Edificio edificio = (Edificio) aux.getData();
+                    if (edificio.getNombre().equals(nombre)) {
+                        return aux;
+                    }
+                } else if (aux.getData() instanceof Curso) {
+                    Curso curso = (Curso) aux.getData();
+                    if (curso.getNombre().equals(nombre)) {
                         return aux;
                     }
                 }
@@ -166,43 +200,26 @@ public class ListaCircular<T> {
         }
         return null;
     }
-    
-   
 
-    public class Nodo<T> {
-
-        private T data;
-        private Nodo<T> next;
-        private Nodo<T> prev;
-
-        public Nodo(T data) {
-            this.data = data;
+    public Nodo<T> buscarID(int id) {
+        if (root != null) {
+            Nodo<T> aux = root;
+            do {
+                if (aux.getData() instanceof Usuario) {
+                    Usuario user = (Usuario) aux.getData();
+                    if (user.getId() == id) {
+                        return aux;
+                    }
+                } else if (aux.getData() instanceof Curso) {
+                    Curso curso = (Curso) aux.getData();
+                    if (curso.getCodigo() == id) {
+                        return aux;
+                    }
+                }
+                aux = aux.getNext();
+            } while (aux != root);
         }
-
-        public T getData() {
-            return data;
-        }
-
-        public Nodo<T> getNext() {
-            return next;
-        }
-
-        public Nodo<T> getPrev() {
-            return prev;
-        }
-
-        public void setData(T data) {
-            this.data = data;
-        }
-
-        public void setNext(Nodo<T> next) {
-            this.next = next;
-        }
-
-        public void setPrev(Nodo<T> prev) {
-            this.prev = prev;
-        }
-
+        return null;
     }
 
 }

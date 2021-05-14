@@ -12,12 +12,12 @@ import javax.swing.JOptionPane;
  *
  * @author Jeffrey
  */
-public class EliminarUsuario extends javax.swing.JFrame {
+public class EliminarCurso extends javax.swing.JFrame {
 
     /**
-     * Creates new form EliminarUsuario
+     * Creates new form EliminarCurso
      */
-    public EliminarUsuario() {
+    public EliminarCurso() {
         initComponents();
         setVisible(true);
         pack();
@@ -50,12 +50,12 @@ public class EliminarUsuario extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 143, 157));
-        jLabel1.setText("Eliminacion de usuario");
+        jLabel1.setText("Eliminacion de curso");
 
         IDJTextField.setBackground(new java.awt.Color(51, 51, 51));
         IDJTextField.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         IDJTextField.setForeground(new java.awt.Color(255, 255, 255));
-        IDJTextField.setText("ID o carnet");
+        IDJTextField.setText("Curso");
         IDJTextField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 IDJTextFieldMouseClicked(evt);
@@ -65,7 +65,7 @@ public class EliminarUsuario extends javax.swing.JFrame {
         IngresarjButton.setBackground(new java.awt.Color(255, 51, 51));
         IngresarjButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         IngresarjButton.setForeground(new java.awt.Color(255, 255, 255));
-        IngresarjButton.setText("Eliminar usuario");
+        IngresarjButton.setText("Eliminar curso");
         IngresarjButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         IngresarjButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,33 +98,35 @@ public class EliminarUsuario extends javax.swing.JFrame {
                         .addComponent(jButton8)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
-                                .addComponent(IDJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(174, 174, 174)
-                        .addComponent(IngresarjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(112, Short.MAX_VALUE))
+                                .addGap(64, 64, 64)
+                                .addComponent(IDJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(174, 174, 174)
+                                .addComponent(IngresarjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(141, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addGap(105, 105, 105))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton8)
-                    .addComponent(jLabel1))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(107, 107, 107)
+                        .addGap(22, 22, 22)
+                        .addComponent(jButton8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addComponent(jLabel1)
+                        .addGap(76, 76, 76)
                         .addComponent(IDJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(IngresarjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(IngresarjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(125, 125, 125))
         );
 
@@ -165,15 +167,15 @@ public class EliminarUsuario extends javax.swing.JFrame {
 
     private void IngresarjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IngresarjButtonActionPerformed
         if ((IDJTextField.getText()!=null) && (!"".equals(IDJTextField.getText()))) {
-            if(claseMain.listaUsuarios.delete(IDJTextField.getText())){
-                JOptionPane.showMessageDialog(null, "Se elimino el usuario");
+            if(claseMain.listaCursos.delete(IDJTextField.getText())){
+                JOptionPane.showMessageDialog(null, "Se elimino el curso");
             }
             else{
-                JOptionPane.showMessageDialog(null, "No se encontro el user");
+                JOptionPane.showMessageDialog(null, "No se encontro el cursor");
             }
         }
         else{
-            JOptionPane.showMessageDialog(null, "No ingreso su el id o carnet");
+            JOptionPane.showMessageDialog(null, "No ingreso el codigo del curso");
         }
     }//GEN-LAST:event_IngresarjButtonActionPerformed
 
@@ -200,20 +202,20 @@ public class EliminarUsuario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EliminarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminarCurso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EliminarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminarCurso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EliminarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminarCurso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EliminarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminarCurso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EliminarUsuario().setVisible(true);
+                new EliminarCurso().setVisible(true);
             }
         });
     }
