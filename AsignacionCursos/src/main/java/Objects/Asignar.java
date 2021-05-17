@@ -1,4 +1,3 @@
-
 package Objects;
 
 /**
@@ -6,16 +5,27 @@ package Objects;
  * @author Jeffrey
  */
 public class Asignar {
+
+    private int codigo;
     private int carnet;
-    private int codCurso;
+    private Horario codHorario;
     private int zona;
     private int examenFinal;
 
-    public Asignar(int carnet, int codCurso, int zona, int examenFinal) {
+    public Asignar(int codigo, int carnet, Horario codHorario, int zona, int examenFinal) {
+        this.codigo = codigo;
         this.carnet = carnet;
-        this.codCurso = codCurso;
+        this.codHorario = codHorario;
         this.zona = zona;
         this.examenFinal = examenFinal;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 
     public int getCarnet() {
@@ -26,12 +36,12 @@ public class Asignar {
         this.carnet = carnet;
     }
 
-    public int getCodCurso() {
-        return codCurso;
+    public Horario getCodHorario() {
+        return codHorario;
     }
 
-    public void setCodCurso(int codCurso) {
-        this.codCurso = codCurso;
+    public void setCodHorario(Horario codHorario) {
+        this.codHorario = codHorario;
     }
 
     public int getZona() {
@@ -49,6 +59,5 @@ public class Asignar {
     public void setExamenFinal(int examenFinal) {
         this.examenFinal = examenFinal;
     }
-    
-    
+
 }

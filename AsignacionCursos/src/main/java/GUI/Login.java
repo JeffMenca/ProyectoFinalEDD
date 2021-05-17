@@ -72,7 +72,7 @@ public class Login extends javax.swing.JFrame {
         TipojComboBox.setBackground(new java.awt.Color(51, 51, 51));
         TipojComboBox.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         TipojComboBox.setForeground(new java.awt.Color(255, 255, 255));
-        TipojComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Estudiante", "Colaborador" }));
+        TipojComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Estudiante", "Colaborador", " " }));
 
         IngresarjButton.setBackground(new java.awt.Color(0, 143, 157));
         IngresarjButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -171,19 +171,20 @@ public class Login extends javax.swing.JFrame {
             try {
                 Usuario user = (Usuario) claseMain.listaUsuarios.buscarDato(usuarioJTextField.getText()).getData();
                 if (user != null && user.getPassword().equals(PasswordjTextField.getText())) {
-                    if (TipojComboBox.getSelectedIndex() == 0) {
-                        claseMain.usuarioActual=user;
+                    if (TipojComboBox.getSelectedIndex() == 0 && user.getTipo().equals("Estudiante")) {
+                        claseMain.usuarioActual = user;
+                        MainFrameEstudiante main = new MainFrameEstudiante();
+                        this.setVisible(false);
+                    } else if (TipojComboBox.getSelectedIndex() == 1 && user.getTipo().equals("Colaborador")) {
+                        claseMain.usuarioActual = user;
                         mainFrame main = new mainFrame();
                         this.setVisible(false);
                     } else {
-                        claseMain.usuarioActual=user;
-                        mainFrame main = new mainFrame();
-                        this.setVisible(false);
+                        JOptionPane.showMessageDialog(null, "Usuario, password o tipo incorrectos");
                     }
-                    
-                }
-                else{
-                    JOptionPane.showMessageDialog(null, "Usuario o password incorrectos");
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Usuario, password o tipo incorrectos");
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "No se encontro el usuario");

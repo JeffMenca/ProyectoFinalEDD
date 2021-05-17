@@ -157,32 +157,39 @@ public class HashTable<T> {
     public boolean remove(int carnet) {
 
         int index = hashing(carnet);
-        List<T> list = arr[index];
-        try {
-            if (((Estudiante) list.getHead().val).getCarnet() == carnet) {
-                list.removeHead();
-                size--;
-                return true;
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "No se encontro el estudiante con ese carnet");
-        }
+        List<T> list;
+        int contador = 0;
 
+        while (contador <= size()) {
+            list = arr[index];
+            if (list.getHead() != null) {
+                if (((Estudiante) list.getHead().val).getCarnet() == carnet) {
+                    list.removeHead();
+                    size--;
+                    return true;
+                }
+            }
+            index = hashingColision(carnet, contador);
+            contador++;
+        }
         return false;
     }
 
     public Estudiante get(int carnet) {
 
         int index = hashing(carnet);
-        List<T> list = arr[index];
-        try {
-            if (((Estudiante) list.getHead().val).getCarnet() == carnet) {
-                return ((Estudiante) list.getHead().val);
+        List<T> list;
+        int contador = 0;
+        while (contador <= size()) {
+            list = arr[index];
+            if (list.getHead() != null) {
+                if (((Estudiante) list.getHead().val).getCarnet() == carnet) {
+                    return (Estudiante) list.getHead().val;
+                }
             }
-        } catch (Exception e) {
-            return null;
+            index = hashingColision(carnet, contador);
+            contador++;
         }
-
         return null;
     }
 

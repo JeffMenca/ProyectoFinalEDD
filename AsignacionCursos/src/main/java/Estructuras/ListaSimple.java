@@ -1,5 +1,6 @@
 package Estructuras;
 
+import Objects.Asignar;
 import Objects.Salon;
 import javax.swing.JOptionPane;
 
@@ -79,6 +80,10 @@ public class ListaSimple<T> {
         if (data instanceof Salon) {
             Salon salon = (Salon) data;
             return String.valueOf(salon.getNumero());
+        }
+        if (data instanceof Asignar) {
+            Asignar asignacion = (Asignar) data;
+            return String.valueOf(asignacion.getCodigo());
         }
         return null;
     }

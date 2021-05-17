@@ -4,9 +4,12 @@ package Estructuras;
  *
  * @author Jeffrey
  */
+import Objects.Asignar;
 import Objects.Curso;
 import Objects.Edificio;
+import Objects.Horario;
 import Objects.Usuario;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -108,6 +111,9 @@ public class ListaCircular<T> {
         } else if (data instanceof Curso) {
             Curso curso = (Curso) data;
             return String.valueOf(curso.getCodigo());
+        } else if (data instanceof Asignar) {
+            Asignar asignacion = (Asignar) data;
+            return String.valueOf(asignacion.getCodigo());
         }
         return null;
     }
@@ -175,6 +181,44 @@ public class ListaCircular<T> {
         }
     }
 
+    public int obtenerAsignacionesSalon(int salon, String edificio) {
+        int contador = 0;
+        if (root != null) {
+            Nodo<T> aux = root;
+
+            do {
+                if (aux.getData() instanceof Asignar) {
+                    Asignar asignacion = (Asignar) aux.getData();
+                    Horario horario = asignacion.getCodHorario();
+                    if ((horario.getEdificio().getNombre().equals(edificio)) && (horario.getSalon().getNumero() == salon)) {
+                        contador++;
+                    }
+
+                }
+                aux = aux.getNext();
+            } while (aux != root);
+        }
+        return contador;
+    }
+
+    public ArrayList<Asignar> obtenerAsignacionesCarnet(int carnet) {
+        ArrayList<Asignar> AsignacionesEncontradas = new ArrayList<>();
+        if (root != null) {
+            Nodo<T> aux = root;
+
+            do {
+                if (aux.getData() instanceof Asignar) {
+                    Asignar asignacion = (Asignar) aux.getData();
+                    if (asignacion.getCarnet() == carnet) {
+                        AsignacionesEncontradas.add(asignacion);
+                    }
+                }
+                aux = aux.getNext();
+            } while (aux != root);
+        }
+        return AsignacionesEncontradas;
+    }
+
     public Nodo<T> buscarDato(String nombre) {
         if (root != null) {
             Nodo<T> aux = root;
@@ -202,23 +246,28 @@ public class ListaCircular<T> {
     }
 
     public Nodo<T> buscarID(int id) {
-        if (root != null) {
-            Nodo<T> aux = root;
-            do {
-                if (aux.getData() instanceof Usuario) {
-                    Usuario user = (Usuario) aux.getData();
-                    if (user.getId() == id) {
-                        return aux;
+        try {
+            if (root != null) {
+                Nodo<T> aux = root;
+                do {
+                    if (aux.getData() instanceof Usuario) {
+                        Usuario user = (Usuario) aux.getData();
+                        if (user.getId() == id) {
+                            return aux;
+                        }
+                    } else if (aux.getData() instanceof Curso) {
+                        Curso curso = (Curso) aux.getData();
+                        if (curso.getCodigo() == id) {
+                            return aux;
+                        }
                     }
-                } else if (aux.getData() instanceof Curso) {
-                    Curso curso = (Curso) aux.getData();
-                    if (curso.getCodigo() == id) {
-                        return aux;
-                    }
-                }
-                aux = aux.getNext();
-            } while (aux != root);
+                    aux = aux.getNext();
+                } while (aux != root);
+            }
+        } catch (Exception e) {
+            return null;
         }
+
         return null;
     }
 

@@ -9,19 +9,19 @@ public class Horario {
     private int codigo;
     private String periodo;
     private String dia;
-    private int codCurso;
-    private int codSalon;
-    private int codEdificio;
-    private int idCatedratico;
+    private Curso curso;
+    private Salon salon;
+    private Edificio edificio;
+    private Catedratico catedratico;
 
-    public Horario(int codigo, String periodo, String dia, int codCurso, int codSalon, int codEdificio, int idCatedratico) {
+    public Horario(int codigo, String periodo, String dia, Curso curso, Salon salon, Edificio edificio, Catedratico catedratico) {
         this.codigo = codigo;
         this.periodo = periodo;
         this.dia = dia;
-        this.codCurso = codCurso;
-        this.codSalon = codSalon;
-        this.codEdificio = codEdificio;
-        this.idCatedratico = idCatedratico;
+        this.curso = curso;
+        this.salon = salon;
+        this.edificio = edificio;
+        this.catedratico = catedratico;
     }
 
     public int getCodigo() {
@@ -48,36 +48,36 @@ public class Horario {
         this.dia = dia;
     }
 
-    public int getCodCurso() {
-        return codCurso;
+    public Curso getCurso() {
+        return curso;
     }
 
-    public void setCodCurso(int codCurso) {
-        this.codCurso = codCurso;
+    public void setCurso(Curso curso) {
+        this.curso = curso;
     }
 
-    public int getCodSalon() {
-        return codSalon;
+    public Salon getSalon() {
+        return salon;
     }
 
-    public void setCodSalon(int codSalon) {
-        this.codSalon = codSalon;
+    public void setSalon(Salon salon) {
+        this.salon = salon;
     }
 
-    public int getCodEdificio() {
-        return codEdificio;
+    public Edificio getEdificio() {
+        return edificio;
     }
 
-    public void setCodEdificio(int codEdificio) {
-        this.codEdificio = codEdificio;
+    public void setEdificio(Edificio edificio) {
+        this.edificio = edificio;
     }
 
-    public int getidCatedratico() {
-        return idCatedratico;
+    public Catedratico getCatedratico() {
+        return catedratico;
     }
 
-    public void setidCatedratico(int idCatedratico) {
-        this.idCatedratico = idCatedratico;
+    public void setCatedratico(Catedratico catedratico) {
+        this.catedratico = catedratico;
     }
 
 }
