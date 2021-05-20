@@ -13,6 +13,12 @@ public class Horario {
     private Salon salon;
     private Edificio edificio;
     private Catedratico catedratico;
+    
+    private String dotName;
+    private int cursoCD;
+    private int salonCD;
+    private String edificioCD;
+    private int catedraticoCD;
 
     public Horario(int codigo, String periodo, String dia, Curso curso, Salon salon, Edificio edificio, Catedratico catedratico) {
         this.codigo = codigo;
@@ -22,6 +28,16 @@ public class Horario {
         this.salon = salon;
         this.edificio = edificio;
         this.catedratico = catedratico;
+    }
+    
+    public Horario(int codigo, String periodo, String dia, int cursoCD, int salonCD, String edificioCD, int catedraticoCD) {
+        this.codigo = codigo;
+        this.periodo = periodo;
+        this.dia = dia;
+        this.cursoCD = cursoCD;
+        this.salonCD = salonCD;
+        this.edificioCD = edificioCD;
+        this.catedraticoCD = catedraticoCD;
     }
 
     public int getCodigo() {
@@ -79,5 +95,47 @@ public class Horario {
     public void setCatedratico(Catedratico catedratico) {
         this.catedratico = catedratico;
     }
+
+    public int getCursoCD() {
+        return cursoCD;
+    }
+
+    public void setCursoCD(int cursoCD) {
+        this.cursoCD = cursoCD;
+    }
+
+    public int getSalonCD() {
+        return salonCD;
+    }
+
+    public void setSalonCD(int salonCD) {
+        this.salonCD = salonCD;
+    }
+
+    public String getEdificioCD() {
+        return edificioCD;
+    }
+
+    public void setEdificioCD(String edificioCD) {
+        this.edificioCD = edificioCD;
+    }
+
+    public int getCatedraticoCD() {
+        return catedraticoCD;
+    }
+
+    public void setCatedraticoCD(int catedraticoCD) {
+        this.catedraticoCD = catedraticoCD;
+    }
+
+    public String getDotName() {
+        return dotName;
+    }
+
+    public void setDotName(String dotName) {
+        this.dotName = dotName;
+    }
+    
+    
 
 }

@@ -1,5 +1,6 @@
 package Estructuras;
 
+import Classes.claseMain;
 import Objects.Catedratico;
 import java.io.File;
 import java.io.IOException;
@@ -11,294 +12,193 @@ import javax.swing.JOptionPane;
  */
 public class ArbolAVLCatedraticos {
 
+    private StringBuffer grafica;
     private NodoAVL raiz;
-    public int size, seCreo = 1;
-    private String graficaArbolUsuarios = "";
+    public int size;
+    private String graficaArbolCapas = "";
 
     public ArbolAVLCatedraticos() {
         this.raiz = null;
         size = 0;
     }
 
-    public void eliminar(int id) {
-        NodoAVL nuevoUser = buscar(id);
-        if (nuevoUser != null) {
-            if (raiz == null) {
-                raiz = null;
-            } else {
-                raiz = eliminarAVL(raiz, nuevoUser);
-            }
-            size--;
-            JOptionPane.showMessageDialog(null, "Se elimino el catedratico");
-        } else {
-            JOptionPane.showMessageDialog(null, "No se encontro el catedratico para eliminar");
+    public NodoAVL buscar(int id, NodoAVL raiz) {
+        if (raiz == null) {
+            return null;
         }
-
-    }
-
-    private NodoAVL eliminarAVL(NodoAVL nodo, NodoAVL nodoUser) {
-        if (nodo == null) {
-            return nodo;
+        if (id == raiz.getClave()) {
+            return raiz;
         }
-        if (nodo.getCatedratico().getId() < raiz.getCatedratico().getId()) {
-            nodo.setLeft(eliminarAVL(nodo.left, nodoUser));
-        } else if (nodo.getCatedratico().getId() > raiz.getCatedratico().getId()) {
-            nodo.setRight(eliminarAVL(nodo.right, nodoUser));
-        } else {
-
-            if ((nodo.left == null) || (nodo.right == null)) {
-                //Hijos
-                NodoAVL aux = null;
-                if (aux == nodo.getLeft()) {
-                    aux = nodo.getRight();
-                } else {
-                    aux = nodo.getLeft();
-                }
-                //No hijos
-                if (aux == null) {
-                    nodo = null;
-                } else {
-                    nodo = aux;
-                }
-            } else {
-                NodoAVL aux = getNodoMayor(nodo.left);
-                nodo.getCatedratico().setId(aux.getCatedratico().getId());
-                nodo.setLeft(eliminarAVL(nodo.left, aux));
-            }
+        if (id > raiz.getClave()) {
+            return buscar(id, raiz.getDer());
         }
-        if (nodo == null) {
-            return nodo;
+        if (id < raiz.getClave()) {
+            return buscar(id, raiz.getIzq());
         }
-        //Actualiza la altura
-        try {
-            nodo.setHeight(Math.max(nodo.getLeft().getHeight(), nodo.right.getHeight()) + 1);
-            int altura = nodo.getHeight();
-            if ((altura > 1) && (nodo.left.getHeight() >= 0)) {
-                return rotacionDerecha(nodo);
-            }
-            if ((altura < -1) && (nodo.right.getHeight() <= 0)) {
-                return rotacionIzquierda(nodo);
-            }
-            if ((altura > 1) && (nodo.left.getHeight() < 0)) {
-                nodo.setLeft(rotacionIzquierda(nodo.left));
-                return rotacionDerecha(nodo);
-            }
-            if ((altura < -1) && (nodo.right.getHeight() > 0)) {
-                nodo.setRight(rotacionDerecha(nodo.right));
-                return rotacionIzquierda(nodo);
-            }
-        } catch (Exception e) {
-        }
-
-        return nodo;
-    }
-
-    private NodoAVL getNodoMayor(NodoAVL nodo) {
-        NodoAVL nodoActual = nodo;
-        while (nodo.getRight() != null) {
-            nodoActual = nodoActual.getRight();
-        }
-        return nodoActual;
+        return null;
     }
 
     public NodoAVL buscar(int id) {
         return buscar(id, this.raiz);
     }
 
-    private NodoAVL buscar(int id, NodoAVL raiz) {
-        if (raiz == null) {
-            return null;
-        }
-        if (id == raiz.getCatedratico().getId()) {
-            return raiz;
-        }
-        if (id > raiz.getCatedratico().getId()) {
-            return buscar(id, raiz.getRight());
-        }
-        if (id < raiz.getCatedratico().getId()) {
-            return buscar(id, raiz.getLeft());
-        }
-        return null;
-    }
-
-    public NodoAVL editar(int id, Catedratico nuevo) {
-        NodoAVL nuevoUser = buscar(id);
-        if (nuevoUser != null) {
-            return editar(nuevoUser.getCatedratico(), this.raiz, nuevo);
-        } else {
-            JOptionPane.showMessageDialog(null, "No se encontro el usuario para editar");
-            return null;
-        }
-    }
-
-    private NodoAVL editar(Catedratico catedratico, NodoAVL raiz, Catedratico nuevo) {
-        if (raiz == null) {
-            return null;
-        }
-        if (catedratico.getId() == raiz.getCatedratico().getId()) {
-            raiz.setCatedratico(nuevo);
-            JOptionPane.showMessageDialog(null, "Se edito el catedratico correctamente");
-            return raiz;
-        }
-        if (catedratico.getId() > raiz.getCatedratico().getId()) {
-            return editar(catedratico, raiz.getRight(), nuevo);
-        }
-        if (catedratico.getId() < raiz.getCatedratico().getId()) {
-            return editar(catedratico, raiz.getRight(), nuevo);
-        }
-        return null;
-    }
-
-    public int obtenerAltura(NodoAVL nodo) {
-        if (nodo == null) {
+    public int obtenerAltura(NodoAVL x) {
+        if (x == null) {
             return -1;
         }
-        return nodo.getHeight();
+        return x.getFactorEquilibrio();
     }
 
-    public NodoAVL rotacionIzquierda(NodoAVL nodo) {
-        NodoAVL aux = nodo.getLeft();
-        nodo.setLeft(aux.getRight());
-        aux.setRight(nodo);
-        nodo.setHeight(Math.max(nodo.getLeft().getHeight(), nodo.getRight().getHeight()) + 1);
-        aux.setHeight(Math.max(nodo.getLeft().getHeight(), nodo.getRight().getHeight()) + 1);
+    public void modificarDato(int id, Catedratico ca) {
+        NodoAVL nodo = buscar(id);
+        if (nodo != null) {
+            nodo.setInfo(ca);
+        }
+    }
+
+    public NodoAVL rotacionIzquierda(NodoAVL c) {
+        NodoAVL aux = c.getIzq();
+        c.setIzq(aux.getDer());
+        aux.setDer(c);
+        c.setFactorEquilibrio(Math.max(obtenerAltura(c.getIzq()), obtenerAltura(c.getDer())) + 1);
+        aux.setFactorEquilibrio(Math.max(obtenerAltura(aux.getIzq()), obtenerAltura(aux.getDer())) + 1);
         return aux;
-
     }
 
-    public NodoAVL rotacionDerecha(NodoAVL nodo) {
-        NodoAVL aux = nodo.getRight();
-        nodo.setRight(aux.getLeft());
-        aux.setLeft(nodo);
-        nodo.setHeight(Math.max(nodo.getLeft().getHeight(), nodo.getRight().getHeight()) + 1);
-        aux.setHeight(Math.max(nodo.getLeft().getHeight(), nodo.getRight().getHeight()) + 1);
+    public NodoAVL rotacionDerecha(NodoAVL c) {
+        NodoAVL aux = c.getDer();
+        c.setDer(aux.getIzq());
+        aux.setIzq(c);
+        c.setFactorEquilibrio(Math.max(obtenerAltura(c.getIzq()), obtenerAltura(c.getDer())) + 1);
+        aux.setFactorEquilibrio(Math.max(obtenerAltura(aux.getIzq()), obtenerAltura(aux.getDer())) + 1);
         return aux;
-
     }
 
-    public NodoAVL rotacionDobleIzquierda(NodoAVL nodo) {
+    public NodoAVL rotacionDobleIzquierda(NodoAVL c) {
         NodoAVL aux;
-        nodo.setLeft(rotacionDerecha(nodo.getLeft()));
-        aux = rotacionIzquierda(nodo);
+        c.setIzq(rotacionDerecha(c.getIzq()));
+        aux = rotacionIzquierda(c);
         return aux;
     }
 
-    public NodoAVL rotacionDobleDerecha(NodoAVL nodo) {
+    public NodoAVL rotacionDobleDerecha(NodoAVL c) {
         NodoAVL aux;
-        nodo.setRight(rotacionIzquierda(nodo.getRight()));
-        aux = rotacionDerecha(nodo);
+        c.setDer(rotacionIzquierda(c.getDer()));
+        aux = rotacionDerecha(c);
         return aux;
     }
 
-    private NodoAVL insertarAVL(NodoAVL nodo, NodoAVL nodoAux) {
-        NodoAVL nodoPadre = nodoAux;
-        seCreo = 1;
-
-        if (nodo.getCatedratico().getId() < nodoAux.getCatedratico().getId()) {
-
-            if (nodoAux.getLeft() == null) {
-                nodoAux.setLeft(nodo);
-            } else {
-                nodoAux.setLeft(insertarAVL(nodo, nodoAux.getLeft()));
-                if (obtenerAltura(nodoAux.getLeft()) - obtenerAltura(nodoAux.getRight()) == 2) {
-                    if (nodo.getCatedratico().getId() < (nodoAux.getLeft().getCatedratico().getId())) {
-                        nodoPadre = rotacionIzquierda(nodoAux);
-                    } else {
-                        nodoPadre = rotacionDerecha(nodoAux);
-                    }
-                }
-            }
-        } else if (nodo.getCatedratico().getId() > nodoAux.getCatedratico().getId()) {
-            if (nodoAux.getRight() == null) {
-                nodoAux.setRight(nodo);
-            } else {
-                nodoAux.setRight(insertarAVL(nodo, nodoAux.getRight()));
-                if (obtenerAltura(nodoAux.getRight()) - obtenerAltura(nodoAux.getLeft()) == 2) {
-                    if (nodo.getCatedratico().getId() > (nodoAux.getRight().getCatedratico().getId())) {
-                        nodoPadre = rotacionDerecha(nodoAux);
-                    } else {
-                        nodoPadre = rotacionIzquierda(nodoAux);
-                    }
-                }
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "El catedratico ya existe, ingrese otro");
-            seCreo = 0;
-        }
-        if (nodoAux.getLeft() == null && nodoAux.getRight() != null) {
-            nodoAux.setHeight(nodoAux.getRight().getHeight() + 1);
-        } else if (nodoAux.getRight() == null && nodoAux.getLeft() != null) {
-            nodoAux.setHeight(nodoAux.getLeft().getHeight() + 1);
-        } else {
-            nodoAux.setHeight(Math.max(obtenerAltura(nodoAux.getLeft()), obtenerAltura(nodoAux.getRight())) + 1);
-        }
-        return nodoPadre;
+    public void eliminar(NodoAVL nuevo) {
+        raiz = eliminarAVL(nuevo, raiz);
+        size--;
     }
 
-    public void insertar(Catedratico catedratico) {
-        NodoAVL nuevoUser = new NodoAVL(catedratico, null, null, 1);
+    private NodoAVL eliminarAVL(NodoAVL nuevo, NodoAVL raiz) {
         if (raiz == null) {
-            raiz = nuevoUser;
+            return raiz;
+        }
+        if (nuevo.getClave() < raiz.getClave()) {
+            raiz.setIzq(eliminarAVL(nuevo, raiz.getIzq()));
+        } else if (nuevo.getClave() > raiz.getClave()) {
+            raiz.setDer(eliminarAVL(nuevo, raiz.getDer()));
         } else {
-            raiz = insertarAVL(nuevoUser, raiz);
-        }
-        size++;
-        if (seCreo == 1) {
-            JOptionPane.showMessageDialog(null, "El catedratico se creo exitosamente");
-        }
-    }
-
-    private NodoAVL insertarAVL2(NodoAVL nodo, NodoAVL nodoAux) {
-        NodoAVL nodoPadre = nodoAux;
-        seCreo = 1;
-
-        if (nodo.getCatedratico().getId() < nodoAux.getCatedratico().getId()) {
-
-            if (nodoAux.getLeft() == null) {
-                nodoAux.setLeft(nodo);
-            } else {
-                nodoAux.setLeft(insertarAVL(nodo, nodoAux.getLeft()));
-                if (obtenerAltura(nodoAux.getLeft()) - obtenerAltura(nodoAux.getRight()) == 2) {
-                    if (nodo.getCatedratico().getId() < (nodoAux.getLeft().getCatedratico().getId())) {
-                        nodoPadre = rotacionIzquierda(nodoAux);
-                    } else {
-                        nodoPadre = rotacionDerecha(nodoAux);
-                    }
+            if ((raiz.getDer() == null) || (raiz.getIzq()) == null) {
+                NodoAVL aux = null;
+                if (aux == raiz.getIzq()) {
+                    aux = raiz.getDer();
+                } else {
+                    aux = raiz.getIzq();
                 }
-            }
-        } else if (nodo.getCatedratico().getId() > nodoAux.getCatedratico().getId()) {
-            if (nodoAux.getRight() == null) {
-                nodoAux.setRight(nodo);
-            } else {
-                nodoAux.setRight(insertarAVL(nodo, nodoAux.getRight()));
-                if (obtenerAltura(nodoAux.getRight()) - obtenerAltura(nodoAux.getLeft()) == 2) {
-                    if (nodo.getCatedratico().getId() > (nodoAux.getRight().getCatedratico().getId())) {
-                        nodoPadre = rotacionDerecha(nodoAux);
-                    } else {
-                        nodoPadre = rotacionIzquierda(nodoAux);
-                    }
-                }
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "El catedratico ya existe, ingrese otro");
-            seCreo = 0;
-        }
-        if (nodoAux.getLeft() == null && nodoAux.getRight() != null) {
-            nodoAux.setHeight(nodoAux.getRight().getHeight() + 1);
-        } else if (nodoAux.getRight() == null && nodoAux.getLeft() != null) {
-            nodoAux.setHeight(nodoAux.getLeft().getHeight() + 1);
-        } else {
-            nodoAux.setHeight(Math.max(obtenerAltura(nodoAux.getLeft()), obtenerAltura(nodoAux.getRight())) + 1);
-        }
-        return nodoPadre;
-    }
 
-    public void insertar2(Catedratico catedratico) {
-        NodoAVL nuevoUser = new NodoAVL(catedratico, null, null, 1);
+                if (aux == null) {
+                    raiz = null;
+                } else {
+                    raiz = aux;
+                }
+            } else {
+                NodoAVL aux = getNodoConValorMaximo(raiz.getIzq());
+                raiz.setClave(aux.getClave());
+                raiz.setIzq(eliminarAVL(aux, raiz.getIzq()));
+            }
+        }
+
         if (raiz == null) {
-            raiz = nuevoUser;
+            return raiz;
+        }
+
+        raiz.setFactorEquilibrio(Math.max(obtenerAltura(raiz.getIzq()), obtenerAltura(raiz.getDer())) + 1);
+
+        int fe = raiz.getFactorEquilibrio();
+
+        if (fe > 1 && raiz.getIzq().getFactorEquilibrio() >= 0) {
+            return rotacionDerecha(raiz);
+        }
+        if (fe < -1 && raiz.getDer().getFactorEquilibrio() <= 0) {
+            return rotacionIzquierda(raiz);
+        }
+        if (fe > 1 && raiz.getIzq().getFactorEquilibrio() < 0) {
+            raiz.setIzq(rotacionIzquierda(raiz.getIzq()));
+            return rotacionDerecha(raiz);
+        }
+        if (fe < -1 && raiz.getDer().getFactorEquilibrio() > 0) {
+            raiz.setDer(rotacionDerecha(raiz.getDer()));
+            return rotacionIzquierda(raiz);
+        }
+        return raiz;
+
+    }
+
+    private NodoAVL insertarAVL(NodoAVL nuevo, NodoAVL subAr) {
+        NodoAVL nuevoPadre = subAr;
+        if (nuevo.getClave() < subAr.getClave()) {
+            if (subAr.getIzq() == null) {
+                subAr.setIzq(nuevo);
+            } else {
+                subAr.setIzq(insertarAVL(nuevo, subAr.getIzq()));
+                if (obtenerAltura(subAr.getIzq()) - obtenerAltura(subAr.getDer()) == 2) {
+                    if (nuevo.getClave() < subAr.getIzq().getClave()) {
+
+                        nuevoPadre = rotacionIzquierda(subAr);
+                    } else {
+                        nuevoPadre = rotacionDerecha(subAr);
+                    }
+                }
+            }
+        } else if (nuevo.getClave() > subAr.getClave()) {
+            if (subAr.getDer() == null) {
+                subAr.setDer(nuevo);
+            } else {
+                subAr.setDer(insertarAVL(nuevo, subAr.getDer()));
+                if (obtenerAltura(subAr.getDer()) - obtenerAltura(subAr.getIzq()) == 2) {
+                    if (nuevo.getClave() > subAr.getDer().getClave()) {
+                        nuevoPadre = rotacionDerecha(subAr);
+                    } else {
+                        nuevoPadre = rotacionIzquierda(subAr);
+                    }
+                }
+            }
         } else {
-            raiz = insertarAVL(nuevoUser, raiz);
+            JOptionPane.showMessageDialog(null, "Nodo duplicado");
+
+        }
+        if (subAr.getIzq() == null && subAr.getDer() != null) {
+            subAr.setFactorEquilibrio(subAr.getDer().getFactorEquilibrio() + 1);
+        } else if (subAr.getDer() == null && subAr.getIzq() != null) {
+            subAr.setFactorEquilibrio(subAr.getIzq().getFactorEquilibrio() + 1);
+        } else {
+            subAr.setFactorEquilibrio(Math.max(obtenerAltura(subAr.getIzq()), obtenerAltura(subAr.getDer())) + 1);
+        }
+        return nuevoPadre;
+    }
+
+    public void insertar(Object info) {
+        Catedratico cate = (Catedratico) info;
+        int id = cate.getId();
+        NodoAVL nuevo = new NodoAVL(id, info);
+        if (raiz == null) {
+            raiz = nuevo;
+        } else {
+            raiz = insertarAVL(nuevo, raiz);
         }
         size++;
     }
@@ -307,27 +207,27 @@ public class ArbolAVLCatedraticos {
         if (null == nodo) {
             return;
         }
-        inOrden(nodo.getLeft());
-        System.out.println("{ ID: " + nodo.getCatedratico().getId() + " }\n");
-        inOrden(nodo.getRight());
+        inOrden(nodo.getIzq());
+        System.out.println("{ Llave: " + nodo.getClave() + " }\n");
+        inOrden(nodo.getDer());
     }
 
     private void preOrden(NodoAVL nodo) {
         if (null == nodo) {
             return;
         }
-        System.out.println("{ ID: " + nodo.getCatedratico().getId() + " }\n");
-        preOrden(nodo.getLeft());
-        preOrden(nodo.getRight());
+        System.out.println("{ Llave: " + nodo.getClave() + " }\n");
+        preOrden(nodo.getIzq());
+        preOrden(nodo.getDer());
     }
 
     private void postOrden(NodoAVL nodo) {
         if (null == nodo) {
             return;
         }
-        postOrden(nodo.getLeft());
-        postOrden(nodo.getRight());
-        System.out.println("{ ID: " + nodo.getCatedratico().getId() + " }\n");
+        postOrden(nodo.getIzq());
+        postOrden(nodo.getDer());
+        System.out.println("{ Llave: " + nodo.getClave() + " }\n");
     }
 
     public void inOrden() {
@@ -340,6 +240,129 @@ public class ArbolAVLCatedraticos {
 
     public void postOrden() {
         postOrden(this.raiz);
+    }
+
+    private NodoAVL getNodoConValorMaximo(NodoAVL nodo) {
+        NodoAVL actual = nodo;
+        while (nodo.getDer() != null) {
+            actual = actual.getDer();
+        }
+        return actual;
+    }
+
+    public class NodoAVL {
+
+        private int clave;
+        private NodoAVL izq;
+        private NodoAVL der;
+        private Object info;
+        private int fe;
+
+        public NodoAVL(int clave, Object info) {
+            this.clave = clave;
+            this.info = info;
+            this.izq = null;
+            this.der = null;
+        }
+
+        public Object getInfo() {
+            return info;
+        }
+
+        public void setInfo(Object info) {
+            this.info = info;
+        }
+
+        public int getClave() {
+            return clave;
+        }
+
+        public void setClave(int clave) {
+            this.clave = clave;
+        }
+
+        public NodoAVL getIzq() {
+            return izq;
+        }
+
+        public void setIzq(NodoAVL izq) {
+            this.izq = izq;
+        }
+
+        public NodoAVL getDer() {
+            return der;
+        }
+
+        public void setDer(NodoAVL der) {
+            this.der = der;
+        }
+
+        public int getFactorEquilibrio() {
+            return fe;
+        }
+
+        public void setFactorEquilibrio(int altura) {
+            this.fe = altura;
+        }
+
+    }
+
+    public void crearGrafica() throws IOException {
+        grafica = new StringBuffer();
+        grafica.append("digraph G{\n"
+                + "subgraph cluster_0{\n"
+                + "node[shape=rect];\n");
+        obtenerGrafica(raiz);
+        grafica.append("label=\"Arbol B de Catedraticos\";\n"
+                + "}\n"
+                + "}\n");
+        File imagenSalida = new File("./listaCatedraticos.dot");
+        if (!imagenSalida.exists()) {
+            imagenSalida.createNewFile();
+        } else {
+            imagenSalida.delete();
+            imagenSalida.createNewFile();
+        }
+        claseMain.guardarImagen(grafica.toString(), imagenSalida.getAbsolutePath());
+        String command = "dot -Tpng listaCatedraticos.dot -o listaCatedraticosImagen.png";
+        Runtime.getRuntime().exec(command);
+    }
+
+    public String crearGraficaHorario() throws IOException {
+        grafica = new StringBuffer();
+        grafica.append(
+                "subgraph cluster_0{\n"
+                + "node[shape=rect];\n");
+        obtenerGrafica(raiz);
+        grafica.append("label=\"Catedraticos\";\n"
+                + "}\n");
+
+        return grafica.toString();
+
+    }
+
+    private void obtenerGrafica(NodoAVL nodo) {
+
+        if (nodo == null) {
+            return;
+        }
+        if (nodo.getDer() == null && nodo.getIzq() == null) {
+            Catedratico catedratico = (Catedratico) nodo.getInfo();
+            grafica.append("\" " + catedratico.getId() + "\n" + catedratico.getNombre() + "\" ;\n");
+        }
+        obtenerGrafica(nodo.getIzq());
+        if (nodo.getIzq() != null) {
+            Catedratico catedratico = (Catedratico) nodo.getInfo();
+            Catedratico catedraticoChild = (Catedratico) nodo.getIzq().getInfo();
+            grafica.append("\" " + catedratico.getId() + "\n" + catedratico.getNombre() + "\"" + "->" + "\" " + catedraticoChild.getId() + "\n" + catedraticoChild.getNombre() + "\"" + ";\n");
+        }
+        if (nodo.getDer() != null) {
+            Catedratico catedratico = (Catedratico) nodo.getInfo();
+            Catedratico catedraticoChild = (Catedratico) nodo.getDer().getInfo();
+            grafica.append("\" " + catedratico.getId() + "\n" + catedratico.getNombre() + "\"" + "->" + "\" " + catedraticoChild.getId() + "\n" + catedraticoChild.getNombre() + "\"" + ";\n");
+        }
+
+        obtenerGrafica(nodo.getDer());
     }
 
 }

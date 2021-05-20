@@ -5,7 +5,10 @@
  */
 package Estructuras;
 
+import Classes.claseMain;
 import Objects.Estudiante;
+import java.io.File;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import javax.swing.JOptionPane;
@@ -359,5 +362,68 @@ public class HashTable<T> {
             }
 
         }
+    }
+
+    public static void graficarTabla(String[] datos) throws IOException {
+        String texto = "";
+        String punteros = "";
+        texto += "struct1 [label=\"";
+        for (int i = 0; i < datos.length; i++) {
+            if (i + 1 == datos.length) {
+                texto += "<" + i + "> " + i;
+            } else {
+                texto += "<" + i + "> " + i + "|";
+            }
+            if (datos[i].equalsIgnoreCase("[]") || datos[i].equalsIgnoreCase(" []")) {
+
+            } else {
+                punteros += "struct1:" + i + "->" + "\"" + datos[i] + "\";\n";
+            }
+        }
+        texto += "\"];\n";
+
+        String salida = "digraph G {\n rankdir=\"LR\";\n"
+                + "node [shape=record];";
+        salida += texto;
+        salida += punteros;
+        salida += "label = \" Tabla Hash de estudiantes \";\n";
+        salida += "}\n";
+
+        File imagenSalida = new File("./listaEstudiantes.dot");
+        if (!imagenSalida.exists()) {
+            imagenSalida.createNewFile();
+        } else {
+            imagenSalida.delete();
+            imagenSalida.createNewFile();
+        }
+        claseMain.guardarImagen(salida, imagenSalida.getAbsolutePath());
+        String command = "dot -Tpng listaEstudiantes.dot -o listaEstudiantesImagen.png";
+        Runtime.getRuntime().exec(command);
+    }
+
+    public String graficarTablaAsignacion(String[] datos) throws IOException {
+        String texto = "";
+        String punteros = "";
+        texto += "struct1 [label=\"";
+        for (int i = 0; i < datos.length; i++) {
+            if (i + 1 == datos.length) {
+                texto += "<" + i + "> " + i;
+            } else {
+                texto += "<" + i + "> " + i + "|";
+            }
+            if (datos[i].equalsIgnoreCase("[]") || datos[i].equalsIgnoreCase(" []")) {
+
+            } else {
+                punteros += "struct1:" + i + "->" + "\"" + datos[i] + "\";\n";
+            }
+        }
+        texto += "\"];\n";
+
+        String salida = "subgraph cluster_ListaEstudiante { \n rankdir=\"LR\";\n"
+                + "node [shape=record]; label=\"Estudiantes\"; \n";
+        salida += texto;
+        salida += punteros;
+        salida += "}\n";
+        return salida;
     }
 }

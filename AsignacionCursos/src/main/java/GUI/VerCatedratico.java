@@ -208,7 +208,7 @@ public class VerCatedratico extends javax.swing.JFrame {
     private void IngresarjButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IngresarjButton1ActionPerformed
         if (IDJTextField.getText() != null && !"".equals(IDJTextField.getText())) {
             try {
-                Catedratico cate = (Catedratico) claseMain.listaCatedraticos.buscar(Integer.valueOf(IDJTextField.getText())).getCatedratico();
+                Catedratico cate = (Catedratico) claseMain.listaCatedraticos.buscar(Integer.valueOf(IDJTextField.getText())).getInfo();
                 if (cate != null) {
                     NombreJTextField1.setText(cate.getNombre());
                     PasswordJTextField.setText(cate.getDireccion());

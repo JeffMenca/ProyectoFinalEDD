@@ -1,0 +1,107 @@
+digraph g { 
+ node [shape=record];
+graph [compound=true];
+subgraph cluster_ListaEdificio { node [shape = square,height=.1]; label="Edificios y salones"; 
+T3->T5 [constraint=false]; 
+T5->T3 [constraint=false]; 
+subgraph cluster_0{node [shape = square,height=.1]; rankdir=LR; label="Salones de T3";  
+T3_310->T3_110; 
+T3_110; 
+ } 
+T3->T3_310[ltail=T3 lhead = cluster_0]; 
+T5->T1 [constraint=false]; 
+T1->T5 [constraint=false]; 
+subgraph cluster_1{node [shape = square,height=.1]; rankdir=LR; label="Salones de T5";  
+T5_310; 
+ } 
+T5->T5_310[ltail=T5 lhead = cluster_1]; 
+T1->T3 [constraint=false]; 
+T3->T1 [constraint=false]; 
+subgraph cluster_2{node [shape = square,height=.1]; rankdir=LR; label="Salones de T1";  
+ } 
+}subgraph cluster_ListaCurso { node [shape = square,height=.1]; label="Cursos"; 
+Curso_771->Curso_777 [constraint=false]; 
+Curso_777->Curso_771 [constraint=false]; 
+Curso_777->Curso_771 [constraint=false]; 
+Curso_771->Curso_777 [constraint=false]; 
+}subgraph cluster_0{
+node[shape=rect];
+" 1
+Prof2" ;
+" 2
+Prof3"->" 1
+Prof2";
+" 3
+Prof2"->" 2
+Prof3";
+" 3
+Prof2"->" 4
+Prof3";
+" 4
+Prof3" ;
+" 5
+Prof2"->" 3
+Prof2";
+" 5
+Prof2"->" 7
+Prof2";
+" 6
+Prof3" ;
+" 7
+Prof2"->" 6
+Prof3";
+" 7
+Prof2"->" 47854
+Prof3";
+" 47854
+Prof3" ;
+label="Catedraticos";
+}
+subgraph cluster_ListaAsignacion { node [shape = square,height=.1]; label="Asignaciones"; 
+Asignacion_1->Asignacion_2 [constraint=false]; 
+Asignacion_2->Asignacion_1 [constraint=false]; 
+Asignacion_2->Asignacion_3 [constraint=false]; 
+Asignacion_3->Asignacion_2 [constraint=false]; 
+Asignacion_3->Asignacion_1 [constraint=false]; 
+Asignacion_1->Asignacion_3 [constraint=false]; 
+}subgraph cluster_ListaEstudiante { 
+ rankdir="LR";
+node [shape=record]; label="Estudiantes"; 
+struct1 [label="<0> 0|<1> 1|<2> 2|<3> 3|<4> 4|<5> 5|<6> 6|<7> 7|<8> 8|<9> 9|<10> 10|<11> 11|<12> 12|<13> 13|<14> 14|<15> 15|<16> 16|<17> 17|<18> 18|<19> 19|<20> 20|<21> 21|<22> 22|<23> 23|<24> 24|<25> 25|<26> 26|<27> 27|<28> 28|<29> 29|<30> 30|<31> 31|<32> 32|<33> 33|<34> 34|<35> 35|<36> 36"];
+struct1:20->" [200145785]";
+struct1:24->" [200745781]";
+struct1:36->" [200478542]";
+}
+Nodo1798413115[label="<P0>|<3>3|<P1>"];
+Nodo1817369078[label="<P0>|<1>1|<P1>|<2>2|<P2>"];
+Nodo1798413115:P0 -> Nodo1817369078;
+Nodo154001426[label="<P0>|<4>4|<P1>|<5>5|<P2>"];
+Nodo1798413115:P1 -> Nodo154001426;
+Nodo1798413115:3->T3_310 [constraint=false]; 
+Nodo1798413115:3->Curso_777 [constraint=false]; 
+Nodo1798413115:3->" 47854
+Prof3" [constraint=false]; 
+Nodo1817369078:1->T3_110 [constraint=false]; 
+Nodo1817369078:1->Curso_777 [constraint=false]; 
+Nodo1817369078:1->" 47854
+Prof3" [constraint=false]; 
+Nodo1817369078:2->T3_110 [constraint=false]; 
+Nodo1817369078:2->Curso_777 [constraint=false]; 
+Nodo1817369078:2->" 47854
+Prof3" [constraint=false]; 
+Nodo154001426:4->T3_310 [constraint=false]; 
+Nodo154001426:4->Curso_777 [constraint=false]; 
+Nodo154001426:4->" 47854
+Prof3" [constraint=false]; 
+Nodo154001426:5->T3_310 [constraint=false]; 
+Nodo154001426:5->Curso_777 [constraint=false]; 
+Nodo154001426:5->" 47854
+Prof3" [constraint=false]; 
+Asignacion_1->Nodo1798413115:3 [constraint=false]; 
+Asignacion_1->" [200478542]" [constraint=false]; 
+Asignacion_2->Nodo1798413115:3 [constraint=false]; 
+Asignacion_2->" [200745781]" [constraint=false]; 
+Asignacion_3->Nodo1817369078:1 [constraint=false]; 
+Asignacion_3->" [200145785]" [constraint=false]; 
+label="Asignaciones"; 
+}

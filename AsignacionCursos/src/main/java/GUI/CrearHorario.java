@@ -281,7 +281,7 @@ public class CrearHorario extends javax.swing.JFrame {
 
                                             if (cursoObject != null) {
                                                 Curso curso = (Curso) cursoObject;
-                                                Catedratico catedratico = claseMain.listaCatedraticos.buscar(Integer.valueOf(CatedraticoJTextField.getText())).getCatedratico();
+                                                Catedratico catedratico = (Catedratico)claseMain.listaCatedraticos.buscar(Integer.valueOf(CatedraticoJTextField.getText())).getInfo();
                                                 if (catedratico != null) {
                                                     Horario repetido = (Horario) claseMain.listaHorarios.search(new LlaveEntero(Integer.valueOf(IDJTextField.getText())));
                                                     if (repetido == null) {

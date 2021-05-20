@@ -8,6 +8,8 @@ package Objects;
 public class Salon {
     private int numero;
     private int capacidad;
+    
+    private String edificio;
 
     public Salon(int numero, int capacidad) {
         this.numero = numero;
@@ -29,6 +31,18 @@ public class Salon {
     public void setCapacidad(int capacidad) {
         this.capacidad = capacidad;
     }
+
+    public String getEdificio() {
+        return edificio;
+    }
+
+    public void setEdificio(String edificio) {
+        this.edificio = edificio;
+    }
+
+    
+    
+    
     
     
 }

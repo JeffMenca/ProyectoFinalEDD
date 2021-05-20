@@ -11,6 +11,9 @@ import Objects.Horario;
 import Objects.Usuario;
 import btree.ArbolB;
 import btree.LlaveEntero;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import javax.swing.JOptionPane;
 
 /**
@@ -38,5 +41,26 @@ public class claseMain {
         
         Login login = new Login();
 
+    }
+    
+    public static void guardarImagen(String texto, String absolutePath) {
+        //Writer para leer el archivo 
+        FileWriter writer = null;
+        try {
+            //Crea el archivo en la absolute path
+            writer = new FileWriter(absolutePath, true);
+            try (BufferedWriter out = new BufferedWriter(writer)) {
+                out.write("");
+                out.write(texto);
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error al guardar la imagen");
+        } finally {
+            try {
+                writer.close();
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Error al guardar la imagen");
+            }
+        }
     }
 }

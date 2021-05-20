@@ -10,6 +10,7 @@ import Objects.Asignar;
 import Objects.Curso;
 import Objects.Estudiante;
 import Objects.Horario;
+import btree.LlaveEntero;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -231,6 +232,7 @@ public class CrearAsignacion extends javax.swing.JFrame {
                             if (nuevo != null) {
                                 claseMain.cantidadAsignaciones++;
                                 Horario horario = horarios.get(TipojComboBox.getSelectedIndex());
+           
                                 if (claseMain.listaAsignaciones.obtenerAsignacionesSalon(horario.getSalon().getNumero(), horario.getEdificio().getNombre()) < horario.getSalon().getCapacidad()) {
                                     Asignar asignacion = new Asignar(claseMain.cantidadAsignaciones, Integer.valueOf(IDJTextField.getText()), horario, Integer.valueOf(NombreJTextField1.getText()), Integer.valueOf(PasswordJTextField.getText()));
                                     claseMain.listaAsignaciones.add(asignacion);

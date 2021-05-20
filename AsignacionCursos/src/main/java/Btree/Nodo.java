@@ -1,7 +1,10 @@
 package btree;
 
 import Classes.claseMain;
+import Estructuras.ListaSimple;
+import Objects.Edificio;
 import Objects.Horario;
+import Objects.Salon;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -26,7 +29,7 @@ public class Nodo {
         b.append(getDotName());
         b.append("[label=\"<P0>");
         for (int i = 0; i < mB; i++) {
-            b.append("|" + mLlaves[i].getKey().toString());
+            b.append("|" + "<" + mLlaves[i].getKey().toString() + ">" + mLlaves[i].getKey().toString());
             b.append("|<P" + (i + 1) + ">");
         }
 
@@ -47,8 +50,15 @@ public class Nodo {
         ArrayList<Horario> horariosEncontrados = new ArrayList<>();
         for (int i = 0; i < mB; i++) {
             Horario horario = (Horario) claseMain.listaHorarios.search(new LlaveEntero(Integer.valueOf(mLlaves[i].getKey().toString())));
+            horario.setDotName(claseMain.listaHorarios.searchNodo(new LlaveEntero(Integer.valueOf(mLlaves[i].getKey().toString()))).getDotName());
             horariosEncontrados.add(horario);
         }
+        for (int i = 0; i <= mB; i++) {
+            if (mPunteros[i] != null) {
+                horariosEncontrados.addAll(mPunteros[i].toArray());
+            }
+        }
+
         return horariosEncontrados;
     }
 

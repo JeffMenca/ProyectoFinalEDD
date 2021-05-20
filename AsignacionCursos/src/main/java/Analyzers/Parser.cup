@@ -1,0 +1,259 @@
+/* Imports */
+package Analyzers;
+import java_cup.runtime.*;
+import java.util.ArrayList;
+import java.util.List;
+import Objects.*;
+import btree.*;
+import Classes.*;
+import javax.swing.JOptionPane;
+/* Codigo java del parser*/
+parser code {:
+    //Listas
+    private ArrayList<Estudiante> estudiantesList = new ArrayList<>();
+    private ArrayList<Usuario> usuariosList = new ArrayList<>();
+    private ArrayList<Edificio> edificiosList = new ArrayList<>();
+    private ArrayList<Salon> salonesList = new ArrayList<>();
+    private ArrayList<Catedratico> catedraticosList = new ArrayList<>();
+    private ArrayList<Curso> cursosList = new ArrayList<>();
+    private ArrayList<Horario> horariosList = new ArrayList<>();
+    private ArrayList<Asignar> asignacionesList = new ArrayList<>();
+    //Metodos
+	public Parser(Lexico lex) {
+		super(lex);
+	}
+	@Override
+        public void syntax_error(Symbol st) {
+            //Reporte el error
+        	Token token = (Token) st.value;
+            report_error("Error Sintactico con el  Token:"+ token.getLexeme()+" este no pertenece a la estructura - linea: "+token.getLine()+" - columna: "+token.getColumn() + "\n",null);
+        }
+    //Metodos de array
+        public ArrayList getEstudiantesList(){ 
+	        return estudiantesList;
+	    }
+        public void addEstudiantesList(Estudiante objeto){
+            try {
+                 estudiantesList.add(objeto);
+                }
+            catch(Exception e) {
+                System.out.println("error encontrado: "+e);
+                }
+	    }
+        public ArrayList getUsuarioList(){ 
+	        return usuariosList;
+	    }
+        public void addUsuariosList(Usuario objeto){
+            try {
+                 usuariosList.add(objeto);
+                }
+            catch(Exception e) {
+                System.out.println("error encontrado: "+e);
+                }
+	    }
+        public ArrayList getEdificiosList(){ 
+	        return edificiosList;
+	    }
+        public void addEdificiosList(Edificio objeto){
+            try {
+                 edificiosList.add(objeto);
+                }
+            catch(Exception e) {
+                System.out.println("error encontrado: "+e);
+                }
+	    }
+        public ArrayList getSalonesList(){ 
+	        return salonesList;
+	    }
+        public void addSalonesList(Salon objeto){
+            try {
+                 salonesList.add(objeto);
+                }
+            catch(Exception e) {
+                System.out.println("error encontrado: "+e);
+                }
+	    }
+        public ArrayList getCatedraticosList(){ 
+	        return catedraticosList;
+	    }
+        public void addCatedraticosList(Catedratico objeto){
+            try {
+                 catedraticosList.add(objeto);
+                }
+            catch(Exception e) {
+                System.out.println("error encontrado: "+e);
+                }
+	    }
+        public ArrayList getCursosList(){ 
+	        return cursosList;
+	    }
+        public void addCursosList(Curso objeto){
+            try {
+                 cursosList.add(objeto);
+                }
+            catch(Exception e) {
+                System.out.println("error encontrado: "+e);
+                }
+	    }
+        public ArrayList getHorariosList(){ 
+	        return horariosList;
+	    }
+        public void addHorariosList(Horario objeto){
+            try {
+                 horariosList.add(objeto);
+                }
+            catch(Exception e) {
+                System.out.println("error encontrado: "+e);
+                }
+	    }
+        public ArrayList getAsignacionesList(){ 
+	        return asignacionesList;
+	    }
+        public void addAsignacionesList(Asignar objeto){
+            try {
+                 asignacionesList.add(objeto);
+                }
+            catch(Exception e) {
+                System.out.println("error encontrado: "+e);
+                }
+	    }
+    
+:};
+
+/* Terminales */
+terminal Token ENTERO,PARENTESISA,PARENTESISB,COMA,PUNTOCOMA,ESTUDIANTE,USUARIO,CATEDRATICO,EDIFICIO,SALON,CURSO,HORARIO,ASIGNAR,STRING,STRINGSINCOMILLA,TIPOESTUDIANTE,TIPOCOLABORADOR;
+/* No Terminales */
+non terminal INICIO,CREARUSUARIO,CREARESTUDIANTE,CREARCATEDRATICO,CREAREDIFICIO,CREARSALON,CREARCURSO,CREARHORARIO,CREARASIGNACION,FINOINICIO;
+
+/* Gramatica : */
+start with INICIO;
+INICIO ::= CREARESTUDIANTE
+        | CREARUSUARIO
+        | CREARCATEDRATICO
+        | CREAREDIFICIO
+        | CREARSALON
+        | CREARCURSO
+        | CREARHORARIO
+        | CREARASIGNACION
+        | error{:System.out.println("Error en expresion");:}
+;   
+
+//Creacion de estudiante
+CREARESTUDIANTE ::= ESTUDIANTE PARENTESISA ENTERO:id COMA STRING:nombre COMA STRING:direccion PARENTESISB PUNTOCOMA FINOINICIO
+{: 
+   String nombrePre= nombre.getLexeme();
+   String nombreFinal= nombrePre.replace("\"", "");
+   String direccionPre= direccion.getLexeme();
+   String direccionFinal= direccionPre.replace("\"", "");
+   Estudiante nuevoEstudiante = new Estudiante(Integer.valueOf(id.getLexeme()),nombreFinal, direccionFinal);
+   addEstudiantesList(nuevoEstudiante);
+:}
+; 
+
+//Creacion de usuario
+CREARUSUARIO ::= USUARIO PARENTESISA ENTERO:id COMA STRING:nombre COMA STRING:password COMA TIPOESTUDIANTE PARENTESISB PUNTOCOMA FINOINICIO
+{:
+String nombrePre= nombre.getLexeme();
+            String nombreFinal= nombrePre.replace("\"", "");
+            String passwordPre= password.getLexeme();
+            String passwordFinal= passwordPre.replace("\"", "");
+             Usuario nuevoUser = new Usuario(Integer.valueOf(id.getLexeme()), nombreFinal, passwordFinal, "Estudiante");
+             addUsuariosList(nuevoUser);
+:}
+   | USUARIO PARENTESISA ENTERO:id COMA STRING:nombre COMA STRING:password COMA TIPOCOLABORADOR PARENTESISB PUNTOCOMA FINOINICIO
+{:
+claseMain.cantidadColaboradores++;
+String nombrePre= nombre.getLexeme();
+String nombreFinal= nombrePre.replace("\"", "");
+String passwordPre= password.getLexeme();
+String passwordFinal= passwordPre.replace("\"", "");
+Usuario nuevoUser = new Usuario(claseMain.cantidadColaboradores, nombreFinal, passwordFinal, "Colaborador");
+addUsuariosList(nuevoUser);
+:}
+; 
+
+//Creacion de catedratico
+CREARCATEDRATICO ::= CATEDRATICO PARENTESISA ENTERO:id COMA STRING:nombre COMA STRING:direccion PARENTESISB PUNTOCOMA FINOINICIO
+{:
+   String nombrePre= nombre.getLexeme();
+   String nombreFinal= nombrePre.replace("\"", "");
+   String direccionPre= direccion.getLexeme();
+   String direccionFinal= direccionPre.replace("\"", "");
+    Catedratico nuevoCatedratico = new Catedratico(Integer.valueOf(id.getLexeme()), nombreFinal, direccionFinal);
+    addCatedraticosList(nuevoCatedratico);
+
+:}
+; 
+
+//Creacion de edificio
+CREAREDIFICIO ::= EDIFICIO PARENTESISA STRING:nombre PARENTESISB PUNTOCOMA FINOINICIO
+{:
+    String nombrePre= nombre.getLexeme();
+    String nombreFinal= nombrePre.replace("\"", "");
+            Edificio nuevoEdificio = new Edificio(nombreFinal);
+            addEdificiosList(nuevoEdificio);
+    
+:}
+; 
+
+//Creacion de salon 
+CREARSALON ::= SALON PARENTESISA STRING:nombre COMA ENTERO:numero COMA ENTERO:capacidad PARENTESISB PUNTOCOMA FINOINICIO
+{:
+
+    String nombrePre= nombre.getLexeme();
+    String nombreFinal= nombrePre.replace("\"", "");
+    Salon salon = new Salon(Integer.valueOf(numero.getLexeme()), Integer.valueOf(capacidad.getLexeme()));
+    salon.setEdificio(nombreFinal);
+    addSalonesList(salon);
+                            
+
+            
+:}
+; 
+
+//Creacion de curso
+CREARCURSO ::= CURSO PARENTESISA ENTERO:id COMA STRING:nombre COMA ENTERO:semestre COMA ENTERO:creditos PARENTESISB PUNTOCOMA FINOINICIO
+{:
+
+    String nombrePre= nombre.getLexeme();
+    String nombreFinal= nombrePre.replace("\"", "");                      
+     Curso nuevoCurso = new Curso(Integer.valueOf(id.getLexeme()), nombreFinal, Integer.valueOf(semestre.getLexeme()), Integer.valueOf(creditos.getLexeme()));
+     addCursosList(nuevoCurso);
+
+                            
+                        
+:}
+; 
+
+//Creacion de horario
+CREARHORARIO ::= HORARIO PARENTESISA ENTERO:codigo COMA STRING:periodo COMA STRING:dia COMA ENTERO:cursoCup COMA ENTERO:salonCup COMA STRINGSINCOMILLA:edificioCup COMA ENTERO:catedraticoCup PARENTESISB PUNTOCOMA FINOINICIO
+{:
+
+       Horario horario = new Horario(Integer.valueOf(codigo.getLexeme()), periodo.getLexeme(), dia.getLexeme(), Integer.valueOf(cursoCup.getLexeme()), Integer.valueOf(salonCup.getLexeme()), edificioCup.getLexeme(), Integer.valueOf(catedraticoCup.getLexeme()));
+       addHorariosList(horario);
+                                                       
+:}
+; 
+
+//Creacion de asignacion
+CREARASIGNACION ::= ASIGNAR PARENTESISA ENTERO:carnet COMA ENTERO:horarioCup COMA ENTERO:zona COMA ENTERO:examen PARENTESISB PUNTOCOMA FINOINICIO
+{:
+
+                               
+                                
+Asignar asignacion = new Asignar(Integer.valueOf(carnet.getLexeme()), Integer.valueOf(horarioCup.getLexeme()), Integer.valueOf(zona.getLexeme()), Integer.valueOf(examen.getLexeme()));
+addAsignacionesList(asignacion);
+                              
+                           
+
+                        
+:}
+; 
+
+
+
+//Accion fin o reiniciar
+FINOINICIO ::= INICIO
+| 
+;
+

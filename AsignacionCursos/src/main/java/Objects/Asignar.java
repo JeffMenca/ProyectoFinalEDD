@@ -11,11 +11,20 @@ public class Asignar {
     private Horario codHorario;
     private int zona;
     private int examenFinal;
+    
+    private int horarioCargaDatos;
 
     public Asignar(int codigo, int carnet, Horario codHorario, int zona, int examenFinal) {
         this.codigo = codigo;
         this.carnet = carnet;
         this.codHorario = codHorario;
+        this.zona = zona;
+        this.examenFinal = examenFinal;
+    }
+    
+    public Asignar(int carnet, int horarioCargaDatos, int zona, int examenFinal) {
+        this.carnet = carnet;
+        this.horarioCargaDatos = horarioCargaDatos;
         this.zona = zona;
         this.examenFinal = examenFinal;
     }
@@ -60,4 +69,13 @@ public class Asignar {
         this.examenFinal = examenFinal;
     }
 
+    public int getHorarioCargaDatos() {
+        return horarioCargaDatos;
+    }
+
+    public void setHorarioCargaDatos(int horarioCargaDatos) {
+        this.horarioCargaDatos = horarioCargaDatos;
+    }
+
+    
 }

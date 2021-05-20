@@ -6,6 +6,10 @@
 package GUI;
 
 import Classes.claseMain;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -76,6 +80,16 @@ public class mainFrame extends javax.swing.JFrame {
         jMenuItem22 = new javax.swing.JMenuItem();
         jMenu9 = new javax.swing.JMenu();
         jMenuItem23 = new javax.swing.JMenuItem();
+        jMenu6 = new javax.swing.JMenu();
+        jMenu10 = new javax.swing.JMenu();
+        jMenu11 = new javax.swing.JMenu();
+        jMenuItem24 = new javax.swing.JMenuItem();
+        jMenuItem25 = new javax.swing.JMenuItem();
+        jMenuItem26 = new javax.swing.JMenuItem();
+        jMenuItem27 = new javax.swing.JMenuItem();
+        jMenuItem28 = new javax.swing.JMenuItem();
+        jMenuItem29 = new javax.swing.JMenuItem();
+        jMenuItem30 = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -126,7 +140,7 @@ public class mainFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(51, 51, 51)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
                         .addGap(29, 29, 29))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(39, 39, 39)
@@ -405,6 +419,85 @@ public class mainFrame extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu9);
 
+        jMenu6.setForeground(new java.awt.Color(255, 255, 255));
+        jMenu6.setText("Cargar datos");
+        jMenu6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu6MouseClicked(evt);
+            }
+        });
+        jMenu6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu6ActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(jMenu6);
+
+        jMenu10.setForeground(new java.awt.Color(255, 255, 255));
+        jMenu10.setText("Reportes");
+        jMenuBar1.add(jMenu10);
+
+        jMenu11.setForeground(new java.awt.Color(255, 255, 255));
+        jMenu11.setText("Graphviz");
+
+        jMenuItem24.setText("Generar usuarios");
+        jMenuItem24.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem24ActionPerformed(evt);
+            }
+        });
+        jMenu11.add(jMenuItem24);
+
+        jMenuItem25.setText("Generar cursos");
+        jMenuItem25.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem25ActionPerformed(evt);
+            }
+        });
+        jMenu11.add(jMenuItem25);
+
+        jMenuItem26.setText("Generar edificios y salones");
+        jMenuItem26.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem26ActionPerformed(evt);
+            }
+        });
+        jMenu11.add(jMenuItem26);
+
+        jMenuItem27.setText("Generar estudiantes");
+        jMenuItem27.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem27ActionPerformed(evt);
+            }
+        });
+        jMenu11.add(jMenuItem27);
+
+        jMenuItem28.setText("Generar catedraticos");
+        jMenuItem28.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem28ActionPerformed(evt);
+            }
+        });
+        jMenu11.add(jMenuItem28);
+
+        jMenuItem29.setText("Generar horarios");
+        jMenuItem29.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem29ActionPerformed(evt);
+            }
+        });
+        jMenu11.add(jMenuItem29);
+
+        jMenuItem30.setText("Generar asignacion");
+        jMenuItem30.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem30ActionPerformed(evt);
+            }
+        });
+        jMenu11.add(jMenuItem30);
+
+        jMenuBar1.add(jMenu11);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -560,6 +653,80 @@ public class mainFrame extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jMenuItem23ActionPerformed
 
+    private void jMenu6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu6ActionPerformed
+        CargarDatos cargarDatos = new CargarDatos();
+        cargarDatos.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jMenu6ActionPerformed
+
+    private void jMenu6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu6MouseClicked
+        CargarDatos cargarDatos = new CargarDatos();
+        cargarDatos.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jMenu6MouseClicked
+
+    private void jMenuItem24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem24ActionPerformed
+        try {
+            claseMain.listaUsuarios.graficarListaCircular();
+            JOptionPane.showMessageDialog(null,"Se genero la imagen de usuarios exitosamente");
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }//GEN-LAST:event_jMenuItem24ActionPerformed
+
+    private void jMenuItem25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem25ActionPerformed
+        try {
+            claseMain.listaCursos.graficarListaCircular();
+            JOptionPane.showMessageDialog(null,"Se genero la imag de cursos exitosamente");
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }//GEN-LAST:event_jMenuItem25ActionPerformed
+
+    private void jMenuItem26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem26ActionPerformed
+        try {
+            claseMain.listaEdificios.graficarListaCircular();
+            JOptionPane.showMessageDialog(null,"Se genero la imagen de edificios exitosamente");
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }//GEN-LAST:event_jMenuItem26ActionPerformed
+
+    private void jMenuItem27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem27ActionPerformed
+        try {
+            String items = claseMain.listaEstudiantes.toString();
+            String[] datos = items.split(",");
+            claseMain.listaEstudiantes.graficarTabla(datos);
+            JOptionPane.showMessageDialog(null,"Se genero la imagen de estudiantes exitosamente");
+        } catch (Exception e) {
+        }
+
+    }//GEN-LAST:event_jMenuItem27ActionPerformed
+
+    private void jMenuItem28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem28ActionPerformed
+        try {
+            claseMain.listaCatedraticos.crearGrafica();
+            JOptionPane.showMessageDialog(null,"Se genero la imagen de catedraticos exitosamente");
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jMenuItem28ActionPerformed
+
+    private void jMenuItem29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem29ActionPerformed
+         try {
+            claseMain.listaHorarios.graficarArbolB();
+            JOptionPane.showMessageDialog(null,"Se genero la imagen de horarios exitosamente");
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jMenuItem29ActionPerformed
+
+    private void jMenuItem30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem30ActionPerformed
+        try {
+            claseMain.listaHorarios.graficarArbolB2();
+            JOptionPane.showMessageDialog(null,"Se genero la imagen de asignaciones exitosamente");
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jMenuItem30ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -604,10 +771,13 @@ public class mainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu10;
+    private javax.swing.JMenu jMenu11;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenu jMenu9;
@@ -628,7 +798,14 @@ public class mainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem21;
     private javax.swing.JMenuItem jMenuItem22;
     private javax.swing.JMenuItem jMenuItem23;
+    private javax.swing.JMenuItem jMenuItem24;
+    private javax.swing.JMenuItem jMenuItem25;
+    private javax.swing.JMenuItem jMenuItem26;
+    private javax.swing.JMenuItem jMenuItem27;
+    private javax.swing.JMenuItem jMenuItem28;
+    private javax.swing.JMenuItem jMenuItem29;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem30;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;

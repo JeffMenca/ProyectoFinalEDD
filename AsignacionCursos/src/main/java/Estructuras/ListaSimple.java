@@ -1,7 +1,13 @@
 package Estructuras;
 
+import Classes.claseMain;
 import Objects.Asignar;
+import Objects.Curso;
+import Objects.Edificio;
 import Objects.Salon;
+import Objects.Usuario;
+import java.io.File;
+import java.io.IOException;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,7 +24,7 @@ public class ListaSimple<T> {
         this.end = null;
     }
 
-    private class Nodo<T> {
+    public class Nodo<T> {
 
         private T data;
         private Nodo<T> next;
@@ -213,34 +219,68 @@ public class ListaSimple<T> {
             }
         }
     }
-    
+
     public void sort() {
         int size = getSize();
-        if (size > 1)
-        {
-            for (int i = 0; i < getSize(); i++)
-            {
+        if (size > 1) {
+            for (int i = 0; i < getSize(); i++) {
                 Nodo<T> actual = root;
                 Nodo<T> siguiente = actual.getNext();
-                for (int j = 1; j < getSize(); j++)
-                {
+                for (int j = 1; j < getSize(); j++) {
                     int id_actual = Integer.valueOf(getId(actual.getData()));
                     int id_siguiente = Integer.valueOf(getId(siguiente.getData()));
-                    if ( id_actual < id_siguiente )
-                    {
+                    if (id_actual < id_siguiente) {
                         T data_actual = actual.getData();
                         actual.setData(siguiente.getData());
                         siguiente.setData(data_actual);
                         actual = actual.getNext();
                         siguiente = siguiente.getNext();
-                    } else
-                    {
+                    } else {
                         actual = actual.getNext();
                         siguiente = siguiente.getNext();
                     }
                 }
             }
         }
+    }
+
+    public Nodo<T> getRoot() {
+        return root;
+    }
+
+    public void setRoot(Nodo<T> root) {
+        this.root = root;
+    }
+
+    public Nodo<T> getEnd() {
+        return end;
+    }
+
+    public void setEnd(Nodo<T> end) {
+        this.end = end;
+    }
+
+    public String graficarSalones(String edificio) throws IOException {
+        String salida = "";
+        if (root != null) {
+            Nodo<T> aux = root;
+            while (aux != null) {
+                if (aux.getData() instanceof Salon) {
+
+                    try {
+                        Salon salon = (Salon) aux.getData();
+                        Salon salonSiguiente = (Salon) aux.getNext().getData();
+                        salida += edificio+"_"+salon.getNumero() + "->" + edificio+"_"+salonSiguiente.getNumero() + "; \n";
+                    } catch (Exception e) {
+                        Salon salon = (Salon) aux.getData();
+                        salida += edificio+"_"+salon.getNumero() + "; \n";
+                    }
+
+                }
+                aux = aux.getNext();
+            }
+        }
+        return salida;
     }
 
 }

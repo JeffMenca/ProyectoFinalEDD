@@ -232,6 +232,7 @@ public class CrearUsuario extends javax.swing.JFrame {
                     if (PasswordJTextField.getText() != null && !"".equals(PasswordJTextField.getText())) {
 
                         try {
+                            
                             if (claseMain.listaUsuarios.buscarID(Integer.valueOf(IDJTextField.getText())) != null) {
                                 JOptionPane.showMessageDialog(null, "El id ya existe (carnet)");
                             } else {

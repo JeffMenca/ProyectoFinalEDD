@@ -6,6 +6,7 @@
 package GUI;
 
 import Classes.claseMain;
+import Estructuras.ArbolAVLCatedraticos;
 import javax.swing.JOptionPane;
 
 /**
@@ -168,7 +169,9 @@ public class EliminarCatedratico extends javax.swing.JFrame {
 
     private void IngresarjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IngresarjButtonActionPerformed
         if ((IDJTextField.getText() != null) && (!"".equals(IDJTextField.getText()))) {
-            claseMain.listaCatedraticos.eliminar(Integer.valueOf(IDJTextField.getText()));
+            ArbolAVLCatedraticos.NodoAVL nodo = claseMain.listaCatedraticos.buscar(Integer.valueOf(IDJTextField.getText()));
+            claseMain.listaCatedraticos.eliminar(nodo);
+            JOptionPane.showMessageDialog(null, "Se elimino el catedratico exitosamente");
         } else {
             JOptionPane.showMessageDialog(null, "No ingreso el codigo del catedratico");
         }

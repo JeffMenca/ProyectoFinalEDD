@@ -224,7 +224,8 @@ public class EditarCatedratico extends javax.swing.JFrame {
                 if (NombreJTextField1.getText() != null && !"".equals(NombreJTextField1.getText())) {
                     if (PasswordJTextField.getText() != null && !"".equals(PasswordJTextField.getText())) {
                         Catedratico nuevo = new Catedratico(Integer.valueOf(IDJTextField.getText()), NombreJTextField1.getText(), PasswordJTextField.getText());
-                        claseMain.listaCatedraticos.editar(Integer.valueOf(IDJTextField.getText()), nuevo);
+                        claseMain.listaCatedraticos.modificarDato(Integer.valueOf(IDJTextField.getText()), nuevo);
+                        JOptionPane.showMessageDialog(null, "Se edito el catedratico exitosamente");
                     } else {
                         JOptionPane.showMessageDialog(null, "No ingreso la nueva direccion");
                     }
@@ -247,7 +248,7 @@ public class EditarCatedratico extends javax.swing.JFrame {
     private void IngresarjButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IngresarjButton1ActionPerformed
         if (IDJTextField.getText() != null && !"".equals(IDJTextField.getText())) {
             try {
-                Catedratico cate = (Catedratico) claseMain.listaCatedraticos.buscar(Integer.valueOf(IDJTextField.getText())).getCatedratico();
+                Catedratico cate = (Catedratico) claseMain.listaCatedraticos.buscar(Integer.valueOf(IDJTextField.getText())).getInfo();
                 if (cate != null) {
                     NombreJTextField1.setText(cate.getNombre());
                     PasswordJTextField.setText(cate.getDireccion());

@@ -208,6 +208,7 @@ public class CrearCatedratico extends javax.swing.JFrame {
                     try {
                         Catedratico nuevoCatedratico = new Catedratico(Integer.valueOf(IDJTextField.getText()), NombreJTextField1.getText(), DireccionJTextField3.getText());
                         claseMain.listaCatedraticos.insertar(nuevoCatedratico);
+                         JOptionPane.showMessageDialog(null, "Se creo el catedratico exitosamente");
                     } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, "Ocurrio un error");
                     }
