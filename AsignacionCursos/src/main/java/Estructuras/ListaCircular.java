@@ -193,13 +193,7 @@ public class ListaCircular<T> {
                 if (aux.getData() instanceof Asignar) {
                     Asignar asignacion = (Asignar) aux.getData();
                     asignacionesEncontradas.add(asignacion);
-                    if (aux.getNext() != null) {
-                        System.out.println("Siguiente: " + getId(aux.getNext().getData()));
-                    }
-                    if (aux.getPrev() != null) {
-                        System.out.println("Anterior: " + getId(aux.getPrev().getData()));
-                    }
-
+                    
                 }
                 aux = aux.getNext();
             } while (aux != root);

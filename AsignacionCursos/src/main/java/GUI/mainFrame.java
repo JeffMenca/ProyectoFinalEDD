@@ -82,6 +82,10 @@ public class mainFrame extends javax.swing.JFrame {
         jMenuItem23 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenu10 = new javax.swing.JMenu();
+        jMenuItem31 = new javax.swing.JMenuItem();
+        jMenuItem32 = new javax.swing.JMenuItem();
+        jMenuItem33 = new javax.swing.JMenuItem();
+        jMenuItem34 = new javax.swing.JMenuItem();
         jMenu11 = new javax.swing.JMenu();
         jMenuItem24 = new javax.swing.JMenuItem();
         jMenuItem25 = new javax.swing.JMenuItem();
@@ -435,6 +439,39 @@ public class mainFrame extends javax.swing.JFrame {
 
         jMenu10.setForeground(new java.awt.Color(255, 255, 255));
         jMenu10.setText("Reportes");
+
+        jMenuItem31.setText("Reporte 1");
+        jMenuItem31.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem31ActionPerformed(evt);
+            }
+        });
+        jMenu10.add(jMenuItem31);
+
+        jMenuItem32.setText("Reporte 2");
+        jMenuItem32.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem32ActionPerformed(evt);
+            }
+        });
+        jMenu10.add(jMenuItem32);
+
+        jMenuItem33.setText("Reporte 3");
+        jMenuItem33.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem33ActionPerformed(evt);
+            }
+        });
+        jMenu10.add(jMenuItem33);
+
+        jMenuItem34.setText("Reporte 4");
+        jMenuItem34.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem34ActionPerformed(evt);
+            }
+        });
+        jMenu10.add(jMenuItem34);
+
         jMenuBar1.add(jMenu10);
 
         jMenu11.setForeground(new java.awt.Color(255, 255, 255));
@@ -668,7 +705,7 @@ public class mainFrame extends javax.swing.JFrame {
     private void jMenuItem24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem24ActionPerformed
         try {
             claseMain.listaUsuarios.graficarListaCircular();
-            JOptionPane.showMessageDialog(null,"Se genero la imagen de usuarios exitosamente");
+            JOptionPane.showMessageDialog(null, "Se genero la imagen de usuarios exitosamente");
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
@@ -677,7 +714,7 @@ public class mainFrame extends javax.swing.JFrame {
     private void jMenuItem25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem25ActionPerformed
         try {
             claseMain.listaCursos.graficarListaCircular();
-            JOptionPane.showMessageDialog(null,"Se genero la imag de cursos exitosamente");
+            JOptionPane.showMessageDialog(null, "Se genero la imag de cursos exitosamente");
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
@@ -686,7 +723,7 @@ public class mainFrame extends javax.swing.JFrame {
     private void jMenuItem26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem26ActionPerformed
         try {
             claseMain.listaEdificios.graficarListaCircular();
-            JOptionPane.showMessageDialog(null,"Se genero la imagen de edificios exitosamente");
+            JOptionPane.showMessageDialog(null, "Se genero la imagen de edificios exitosamente");
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
@@ -697,7 +734,7 @@ public class mainFrame extends javax.swing.JFrame {
             String items = claseMain.listaEstudiantes.toString();
             String[] datos = items.split(",");
             claseMain.listaEstudiantes.graficarTabla(datos);
-            JOptionPane.showMessageDialog(null,"Se genero la imagen de estudiantes exitosamente");
+            JOptionPane.showMessageDialog(null, "Se genero la imagen de estudiantes exitosamente");
         } catch (Exception e) {
         }
 
@@ -706,15 +743,15 @@ public class mainFrame extends javax.swing.JFrame {
     private void jMenuItem28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem28ActionPerformed
         try {
             claseMain.listaCatedraticos.crearGrafica();
-            JOptionPane.showMessageDialog(null,"Se genero la imagen de catedraticos exitosamente");
+            JOptionPane.showMessageDialog(null, "Se genero la imagen de catedraticos exitosamente");
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jMenuItem28ActionPerformed
 
     private void jMenuItem29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem29ActionPerformed
-         try {
+        try {
             claseMain.listaHorarios.graficarArbolB();
-            JOptionPane.showMessageDialog(null,"Se genero la imagen de horarios exitosamente");
+            JOptionPane.showMessageDialog(null, "Se genero la imagen de horarios exitosamente");
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jMenuItem29ActionPerformed
@@ -722,10 +759,34 @@ public class mainFrame extends javax.swing.JFrame {
     private void jMenuItem30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem30ActionPerformed
         try {
             claseMain.listaHorarios.graficarArbolB2();
-            JOptionPane.showMessageDialog(null,"Se genero la imagen de asignaciones exitosamente");
+            JOptionPane.showMessageDialog(null, "Se genero la imagen de asignaciones exitosamente");
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jMenuItem30ActionPerformed
+
+    private void jMenuItem31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem31ActionPerformed
+        Reporte1 reporte1 = new Reporte1();
+        reporte1.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jMenuItem31ActionPerformed
+
+    private void jMenuItem32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem32ActionPerformed
+        Reporte2 reporte2 = new Reporte2();
+        reporte2.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jMenuItem32ActionPerformed
+
+    private void jMenuItem33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem33ActionPerformed
+        Reporte3 reporte3 = new Reporte3();
+        reporte3.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jMenuItem33ActionPerformed
+
+    private void jMenuItem34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem34ActionPerformed
+        Reporte4 reporte4 = new Reporte4();
+        reporte4.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jMenuItem34ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -806,6 +867,10 @@ public class mainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem29;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem30;
+    private javax.swing.JMenuItem jMenuItem31;
+    private javax.swing.JMenuItem jMenuItem32;
+    private javax.swing.JMenuItem jMenuItem33;
+    private javax.swing.JMenuItem jMenuItem34;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;

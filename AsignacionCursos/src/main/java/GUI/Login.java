@@ -72,7 +72,7 @@ public class Login extends javax.swing.JFrame {
         TipojComboBox.setBackground(new java.awt.Color(51, 51, 51));
         TipojComboBox.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         TipojComboBox.setForeground(new java.awt.Color(255, 255, 255));
-        TipojComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Estudiante", "Colaborador", " " }));
+        TipojComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Estudiante", "Colaborador" }));
 
         IngresarjButton.setBackground(new java.awt.Color(0, 143, 157));
         IngresarjButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N

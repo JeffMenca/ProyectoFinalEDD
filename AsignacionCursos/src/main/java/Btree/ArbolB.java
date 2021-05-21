@@ -80,7 +80,7 @@ public class ArbolB {
             Horario horarioAsignacion = asignacion.getCodHorario();
             String horariosAsignados = "Asignacion_" + asignacion.getCodigo() + "->" + horarioAsignacion.getDotName() + ":" + horarioAsignacion.getCodigo() + " [constraint=false]; \n";
             b.append(horariosAsignados);
-            String estudiantesAsignados = "Asignacion_" + asignacion.getCodigo() + "->" + "\"" + " ["+asignacion.getCarnet()+"]" + "\""+ " [constraint=false]; \n";
+            String estudiantesAsignados = "Asignacion_" + asignacion.getCodigo() + "->" + "\"" + "["+asignacion.getCarnet()+"]" + "\""+ " [constraint=false]; \n";
             b.append(estudiantesAsignados);
 
         }

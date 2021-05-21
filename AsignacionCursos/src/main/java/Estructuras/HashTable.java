@@ -414,7 +414,7 @@ public class HashTable<T> {
             if (datos[i].equalsIgnoreCase("[]") || datos[i].equalsIgnoreCase(" []")) {
 
             } else {
-                punteros += "struct1:" + i + "->" + "\"" + datos[i] + "\";\n";
+                punteros += "struct1:" + i + "->" + "\"" + datos[i].replace(" ", "") + "\";\n";
             }
         }
         texto += "\"];\n";
